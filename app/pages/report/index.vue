@@ -123,7 +123,7 @@ const netBgColor = computed(() => {
           </div>
         </UCard>
 
-        <div v-if="reportData" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- <div v-if="reportData" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <UCard class="border-l-4 border-green-500">
             <div class="flex items-center gap-3">
               <div class="stat-icon-box bg-green-500/10">
@@ -168,7 +168,7 @@ const netBgColor = computed(() => {
               </div>
             </div>
           </UCard>
-        </div>
+        </div> -->
 
         <UCard v-if="loading">
           <div class="space-y-4 p-2">

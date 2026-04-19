@@ -19,13 +19,13 @@ export async function exportProfitLossReport(dateFrom: string, dateTo: string): 
   }).toString()
 
   const res = await apiRequest<Response>(`${API_ENDPOINT}/export?${query}`)
-  
+
   if (res && res instanceof Response) {
     const blob = await res.blob()
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.setAttribute('download', `profit-loss-${dateFrom}-to-${dateTo}.xlsx`)
+    link.setAttribute('download', `report-${dateFrom}-to-${dateTo}.xlsx`)
     document.body.appendChild(link)
     link.click()
     link.remove()

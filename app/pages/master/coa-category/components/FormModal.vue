@@ -6,6 +6,7 @@ const props = defineProps<{
   open: boolean
   mode: 'create' | 'update'
   data?: CoaCategory | null
+  loading?: boolean
 }>()
 
 const emit = defineEmits(['update:open', 'saved', 'close'])
@@ -73,8 +74,8 @@ const triggerSubmit = () => {
     <template #footer>
       <div class="flex justify-end gap-3">
         <UButton variant="ghost" color="neutral" @click="isOpen = false">Batal</UButton>
-        <UButton color="primary" @click="triggerSubmit">
-          {{ mode === 'create' ? 'Simpan' : 'Perbarui' }}
+        <UButton color="primary" @click="triggerSubmit" :loading="loading" :disabled="loading">
+          {{ loading ? 'Loading...' : (mode === 'create' ? 'Simpan' : 'Perbarui') }}
         </UButton>
       </div>
     </template>

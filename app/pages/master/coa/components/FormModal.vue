@@ -7,6 +7,7 @@ const props = defineProps<{
   open: boolean
   mode: 'create' | 'update'
   data?: Coa | null
+  loading?: boolean
 }>()
 
 const emit = defineEmits(['update:open', 'saved', 'close'])
@@ -78,8 +79,8 @@ watch(() => props.open, (newVal) => {
 const validate = (state: any) => {
   const errors = []
   if (!state.ms_coa_category_id) errors.push({ path: 'ms_coa_category_id', message: 'Kategori wajib dipilih' })
-  if (!state.ms_coa_code) errors.push({ path: 'ms_coa_code', message: 'Kode Akun wajib diisi' })
-  if (!state.ms_coa_type) errors.push({ path: 'ms_coa_type', message: 'Tipe Akun wajib dipilih' })
+  if (!state.ms_coa_code) errors.push({ path: 'ms_coa_code', message: 'Kode Coa wajib diisi' })
+  if (!state.ms_coa_type) errors.push({ path: 'ms_coa_type', message: 'Tipe Coa wajib dipilih' })
   if (!state.ms_coa_name) errors.push({ path: 'ms_coa_name', message: 'Nama Akun wajib diisi' })
   return errors
 }
@@ -110,15 +111,15 @@ const triggerSubmit = () => {
         </UFormField>
 
         <div class="grid grid-cols-2 gap-4">
-          <UFormField name="ms_coa_code" label="Kode Akun" required>
+          <UFormField name="ms_coa_code" label="Kode Coa" required>
             <UInput v-model="formData.ms_coa_code" placeholder="cth: 1001" class="w-full" />
           </UFormField>
 
-          <UFormField name="ms_coa_type" label="Tipe Akun" required>
+          <UFormField name="ms_coa_type" label="Tipe Coa" required>
             <USelect
               v-model="formData.ms_coa_type"
               :items="typeOptions"
-              placeholder="Pilih tipe akun"
+              placeholder="Pilih Tipe Coa"
               class="w-full"
             />
           </UFormField>
@@ -139,8 +140,8 @@ const triggerSubmit = () => {
     <template #footer>
       <div class="flex justify-end gap-3">
         <UButton variant="ghost" color="neutral" @click="isOpen = false">Batal</UButton>
-        <UButton color="primary" @click="triggerSubmit">
-          {{ mode === 'create' ? 'Simpan' : 'Perbarui' }}
+        <UButton color="primary" @click="triggerSubmit" :loading="loading" :disabled="loading">
+          {{ loading ? 'Loading...' : (mode === 'create' ? 'Simpan' : 'Perbarui') }}
         </UButton>
       </div>
     </template>
