@@ -7,6 +7,7 @@ const props = defineProps<{
   open: boolean
   mode: 'create' | 'update'
   data?: Transaction | null
+  loading?: boolean
 }>()
 
 const emit = defineEmits(['update:open', 'saved', 'close'])
@@ -97,7 +98,7 @@ const displayCredit = computed({
 
 const validate = (state: any) => {
   const errors = []
-  if (!state.tr_transaction_ms_coa_uuid) errors.push({ path: 'tr_transaction_ms_coa_uuid', message: 'Akun COA wajib dipilih' })
+  if (!state.tr_transaction_ms_coa_uuid) errors.push({ path: 'tr_transaction_ms_coa_uuid', message: 'Coa wajib dipilih' })
   if (!state.tr_transaction_date) errors.push({ path: 'tr_transaction_date', message: 'Tanggal Transaksi wajib diisi' })
   
   const debit = Number(state.tr_transaction_debit) || 0
@@ -126,12 +127,12 @@ const triggerSubmit = () => {
   <UModal v-model:open="isOpen" :title="mode === 'create' ? 'Tambah Transaksi' : 'Edit Transaksi'">
     <template #body>
       <UForm id="transactionForm" :state="formData" :validate="validate" class="space-y-4" @submit="submit">
-        <UFormField name="tr_transaction_ms_coa_uuid" label="Akun COA" required>
+        <UFormField name="tr_transaction_ms_coa_uuid" label="Coa" required>
           <USelectMenu
             v-model="formData.tr_transaction_ms_coa_uuid"
             value-key="value"
             :items="coas"
-            placeholder="Pilih akun COA"
+            placeholder="Pilih Coa"
             class="w-full"
           />
         </UFormField>
@@ -170,8 +171,8 @@ const triggerSubmit = () => {
     <template #footer>
       <div class="flex justify-end gap-3">
         <UButton variant="ghost" color="neutral" @click="isOpen = false">Batal</UButton>
-        <UButton color="primary" @click="triggerSubmit">
-          {{ mode === 'create' ? 'Simpan' : 'Perbarui' }}
+        <UButton color="primary" @click="triggerSubmit" :loading="loading" :disabled="loading">
+          {{ loading ? 'Loading...' : (mode === 'create' ? 'Simpan' : 'Perbarui') }}
         </UButton>
       </div>
     </template>

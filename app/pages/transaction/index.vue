@@ -343,12 +343,14 @@ const hasActiveFilters = computed(() => {
           v-model:open="showModal"
           :mode="modalMode"
           :data="selectedData"
+          :loading="loading"
           @saved="handleSave"
           @close="showModal = false"
         />
         <DeleteConfirm
           v-model:open="showDeleteModal"
           :data="dataToDelete"
+          :loading="loading"
           @confirm="handleDelete"
           @close="showDeleteModal = false"
         />

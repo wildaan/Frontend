@@ -4,6 +4,7 @@ import type { CoaCategory } from '~/types/accounting'
 const props = defineProps<{
   open: boolean
   data?: CoaCategory | null
+  loading?: boolean
 }>()
 
 const emit = defineEmits(['update:open', 'confirm', 'close'])
@@ -35,7 +36,9 @@ const onConfirm = () => {
     <template #footer>
       <div class="flex justify-center gap-3">
         <UButton color="neutral" variant="soft" @click="isOpen = false">Batal</UButton>
-        <UButton color="error" @click="onConfirm">Ya, Hapus</UButton>
+        <UButton color="error" @click="onConfirm" :loading="loading" :disabled="loading">
+          {{ loading ? 'Loading...' : 'Ya, Hapus' }}
+        </UButton>
       </div>
     </template>
   </UModal>

@@ -19,13 +19,13 @@ const links = computed(() => {
       onSelect: () => { open.value = false }
     },
     {
-      label: 'Transactions',
+      label: 'Transaksi',
       icon: 'i-heroicons-banknotes',
       to: '/transaction',
       onSelect: () => { open.value = false }
     },
     {
-      label: 'Reports',
+      label: 'Laporan',
       icon: 'i-heroicons-document-chart-bar',
       to: '/report',
       onSelect: () => { open.value = false }
@@ -34,7 +34,7 @@ const links = computed(() => {
       label: 'Master Data',
       icon: 'i-heroicons-circle-stack',
       children: [
-        { label: 'COA Category', to: '/master/coa-category', onClick: () => { open.value = false } },
+        { label: 'Kategori Coa', to: '/master/coa-category', onClick: () => { open.value = false } },
         { label: 'Chart of Accounts', to: '/master/coa', onClick: () => { open.value = false } }
       ]
     },

@@ -10,14 +10,14 @@ const stats = computed(() => {
   
   return [
     { label: 'Total Transaksi', value: s.total_transactions?.toString() || '0', icon: 'i-heroicons-banknotes', bgColor: 'bg-blue-500/10', iconColor: 'text-blue-500' },
-    { label: 'Total Akun COA', value: s.total_coa?.toString() || '0', icon: 'i-heroicons-book-open', bgColor: 'bg-emerald-500/10', iconColor: 'text-emerald-500' },
+    { label: 'Total Coa', value: s.total_coa?.toString() || '0', icon: 'i-heroicons-book-open', bgColor: 'bg-emerald-500/10', iconColor: 'text-emerald-500' },
     { label: 'Total Kategori', value: s.total_categories?.toString() || '0', icon: 'i-heroicons-folder', bgColor: 'bg-amber-500/10', iconColor: 'text-amber-500' },
   ]
 })
 
 const columns = [
   { accessorKey: 'date', header: 'Tanggal' },
-  { accessorKey: 'coa_name', header: 'Akun' },
+  { accessorKey: 'coa_name', header: 'Coa' },
   { accessorKey: 'desc', header: 'Keterangan' },
   { accessorKey: 'debit', header: 'Debit' },
   { accessorKey: 'credit', header: 'Kredit' }

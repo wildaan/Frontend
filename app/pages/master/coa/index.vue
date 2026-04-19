@@ -31,7 +31,7 @@ const dataToDelete = ref<Coa | null>(null)
 
 const columns: TableColumn<Coa>[] = [
   { accessorKey: 'ms_coa_code', header: 'Kode' },
-  { accessorKey: 'ms_coa_name', header: 'Nama Akun' },
+  { accessorKey: 'ms_coa_name', header: 'Nama Coa' },
   { accessorKey: 'ms_coa_category_name', header: 'Kategori' },
   { accessorKey: 'ms_coa_type', header: 'Tipe' },
   { accessorKey: 'ms_coa_status', header: 'Status' },
@@ -165,7 +165,7 @@ const showingTo = computed(() => Math.min(currentPage.value * perPage.value, tot
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <UInput
               v-model="searchQuery"
-              placeholder="Cari kode atau nama akun..."
+              placeholder="Cari kode atau Nama Coa..."
               icon="i-heroicons-magnifying-glass"
               class="w-full sm:max-w-xs"
               :disabled="initialLoading"
@@ -267,12 +267,14 @@ const showingTo = computed(() => Math.min(currentPage.value * perPage.value, tot
           v-model:open="showModal"
           :mode="modalMode"
           :data="selectedData"
+          :loading="loading"
           @saved="handleSave"
           @close="showModal = false"
         />
         <DeleteConfirm
           v-model:open="showDeleteModal"
           :data="dataToDelete"
+          :loading="loading"
           @confirm="handleDelete"
           @close="showDeleteModal = false"
         />

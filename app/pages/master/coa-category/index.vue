@@ -263,6 +263,7 @@ const showingTo = computed(() => Math.min(currentPage.value * perPage.value, tot
           v-model:open="showModal"
           :mode="modalMode"
           :data="selectedData"
+          :loading="loading"
           @saved="handleSave"
           @close="showModal = false"
         />
@@ -270,6 +271,7 @@ const showingTo = computed(() => Math.min(currentPage.value * perPage.value, tot
         <DeleteConfirm
           v-model:open="showDeleteModal"
           :data="dataToDelete"
+          :loading="loading"
           @confirm="handleDelete"
           @close="showDeleteModal = false"
         />
