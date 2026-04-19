@@ -1,0 +1,227 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* ============================================
+   DESIGN SYSTEM — BASE PROJECT
+   Catatan: File ini berisi konfigurasi global
+   untuk tema, font, dan override komponen.
+   ============================================ */
+
+@theme static {
+  --font-sans: 'Inter', 'Public Sans', sans-serif;
+
+  /* Palet warna hijau kustom */
+  --color-green-50: #EFFDF5;
+  --color-green-100: #D9FBE8;
+  --color-green-200: #B3F5D1;
+  --color-green-300: #75EDAE;
+  --color-green-400: #00DC82;
+  --color-green-500: #00C16A;
+  --color-green-600: #00A155;
+  --color-green-700: #007F45;
+  --color-green-800: #016538;
+  --color-green-900: #0A5331;
+  --color-green-950: #052E16;
+}
+
+/* ============================================
+   FIX UTAMA: Dashboard Panel Body
+   Masalah: Pagination ter-clip karena overflow hidden
+   Solusi: Paksa body panel bisa scroll vertikal
+   ============================================ */
+[data-orientation="vertical"] > div:last-child,
+.dashboard-panel-body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Pastikan konten dalam panel tidak terpotong */
+[id$="-content"] {
+  overflow: visible !important;
+}
+
+/* ============================================
+   UTILITAS TABEL & PAGINATION
+   Berguna untuk membungkus tabel agar bisa scroll
+   dan pagination selalu terlihat
+   ============================================ */
+
+/* Wrapper tabel — bisa scroll horizontal kalau kolom banyak */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Container pagination — selalu terlihat di bawah tabel */
+.pagination-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ui-border);
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ============================================
+   STYLING KARTU & HALAMAN
+   ============================================ */
+
+/* Header halaman dengan gradient subtle */
+.page-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--ui-border);
+  background: linear-gradient(135deg, var(--ui-bg) 0%, var(--ui-bg-elevated) 100%);
+}
+
+.page-header h1 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.page-header p {
+  font-size: 0.8125rem;
+  opacity: 0.6;
+  margin-top: 0.125rem;
+}
+
+/* Toolbar — area search + tombol aksi */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--ui-border);
+  background: var(--ui-bg-elevated);
+}
+
+/* Filter bar — untuk halaman yg punya banyak filter */
+.filter-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   STATISTIK CARD DI HOME
+   ============================================ */
+.stat-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   TABEL LAPORAN (Profit & Loss, dll)
+   Style khusus untuk tabel laporan keuangan
+   ============================================ */
+.report-table {
+  width: 100%;
+  font-size: 0.875rem;
+  border-collapse: collapse;
+}
+
+.report-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--ui-border);
+  background: var(--ui-bg-elevated);
+}
+
+.report-table td {
+  padding: 0.625rem 1rem;
+}
+
+.report-table .section-header td {
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8125rem;
+  background: var(--ui-bg-elevated);
+}
+
+.report-table .category-row td {
+  font-weight: 600;
+  padding-left: 1.5rem;
+}
+
+.report-table .coa-row td {
+  padding-left: 2.5rem;
+  border-bottom: 1px solid var(--ui-border-muted, rgba(0,0,0,0.05));
+}
+
+.report-table .subtotal-row td {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  background: var(--ui-bg-elevated);
+}
+
+.report-table .total-row td {
+  font-weight: 700;
+  padding: 0.875rem 1rem;
+  border-top: 2px solid var(--ui-border);
+}
+
+.report-table .grand-total-row td {
+  font-weight: 800;
+  font-size: 1.125rem;
+  padding: 1rem;
+  border-top: 3px double var(--ui-border);
+  border-bottom: 3px double var(--ui-border);
+}
+
+/* ============================================
+   ANIMASI HALUS
+   Transisi untuk elemen interaktif
+   ============================================ */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Hover efek pada baris tabel */
+table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+/* ============================================
+   RESPONSIF
+   Penyesuaian untuk layar kecil
+   ============================================ */
+@media (max-width: 640px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-size: 1.125rem;
+  }
+}
