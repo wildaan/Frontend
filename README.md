@@ -1,4 +1,4 @@
-# Profit and Loss Frontend
+# Accounting Frontend
 
 This is the Nuxt 3 frontend application for the Accounting UI.
 
